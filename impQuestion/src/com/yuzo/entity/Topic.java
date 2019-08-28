@@ -44,7 +44,15 @@ public class Topic {
     
     
 
-    @Override
+    public String getSctnId() {
+		return sctnId;
+	}
+
+	public void setSctnId(String sctnId) {
+		this.sctnId = sctnId;
+	}
+
+	@Override
 	public String toString() {
 		return "Topic [topicId=" + topicId + ", subjectId=" + subjectId + ", topicType=" + topicType + ", topicName="
 				+ topicName + ", answera=" + answera + ", answerb=" + answerb + ", answerc=" + answerc + ", answerd="

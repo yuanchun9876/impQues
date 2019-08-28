@@ -116,6 +116,9 @@
 								<div class="box box-primary">
 									<div class="box-header with-border">
 										<h3 class="box-title">基本信息</h3>
+										<div class="box-search">
+											<button type="submit" class="btn btn-info pull-right">提交</button>
+										</div>
 									</div>
 									<!-- /.box-header -->
 									<!-- form start -->

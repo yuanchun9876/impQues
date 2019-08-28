@@ -93,6 +93,13 @@ public class QstnController {
 		System.out.println("µ¼Èë:"+t);
 		int count = impService.impSave(t);
 		System.out.println("count:" + count);
+		
+		if(count>0) {
+			t.setTopicState(1);
+			int editcount = service.edit(t);
+			System.out.println("editcount:" + editcount);
+		}
+			
 		return "redirect:query.action";
 	}
 	

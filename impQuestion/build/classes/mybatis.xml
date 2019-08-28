@@ -7,15 +7,15 @@
             <transactionManager type="JDBC" />
             <dataSource type="POOLED"> 
                 <property name="driver" value="org.gjt.mm.mysql.Driver" /> 
-                <property name="url" value="jdbc:mysql://114.115.151.102:3306/question?useUnicode=true" /> 
+                <property name="url" value="jdbc:mysql://localhost:3306/tm9?useUnicode=true" /> 
                 <property name="username" value="root" /> 
                 <property name="password" value="root" /> 
             </dataSource> 
         </environment> 
     </environments> 
     <mappers>
-    	
-    	<mapper resource="com/yuzo/mapper/QuestionMapper.xml"/>
-    	<mapper resource="com/yuzo/mapper/AnswerMapper.xml"/>
+    	<mapper resource="com/yuzo/mapper/SubjectMapper.xml"/>
+    	<mapper resource="com/yuzo/mapper/TopicMapper.xml"/>
+    	<mapper resource="com/yuzo/mapper/JsfxMapper.xml"/>
     </mappers> 
 </configuration>

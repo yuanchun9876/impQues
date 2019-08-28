@@ -92,6 +92,7 @@ public class QstnServiceImpl implements IQstnService {
 		mapper = session.getMapper(TopicMapper.class);
 		System.out.println("ttt:" + t);
 		int count = mapper.updateByPrimaryKeySelective(t);
+		session.commit();
 		session.close();
 		return count;
 	}
