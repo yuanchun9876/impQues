@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuzo.mapper.TopicMapper" >
+  <resultMap id="BaseResultMap" type="com.yuzo.entity.Topic" >
+    <id column="topic_id" property="topicId" jdbcType="INTEGER" />
+    <result column="subject_id" property="subjectId" jdbcType="INTEGER" />
+    <result column="topic_type" property="topicType" jdbcType="INTEGER" />
+    <result column="topic_name" property="topicName" jdbcType="VARCHAR" />
+    <result column="answera" property="answera" jdbcType="VARCHAR" />
+    <result column="answerb" property="answerb" jdbcType="VARCHAR" />
+    <result column="answerc" property="answerc" jdbcType="VARCHAR" />
+    <result column="answerd" property="answerd" jdbcType="VARCHAR" />
+    <result column="trueanswer" property="trueanswer" jdbcType="VARCHAR" />
+    <result column="topic_difficulty" property="topicDifficulty" jdbcType="TINYINT" />
+    <result column="emphasis_id" property="emphasisId" jdbcType="INTEGER" />
+    <result column="emphasis_name" property="emphasisName" jdbcType="VARCHAR" />
+    <result column="topic_createdate" property="topicCreatedate" jdbcType="TIMESTAMP" />
+    <result column="topic_url" property="topicUrl" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="topic_state" property="topicState" jdbcType="INTEGER" />
+    <result column="videoimg_url" property="videoimgUrl" jdbcType="VARCHAR" />
+    <result column="topic_analysis" property="topicAnalysis" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    topic_id, subject_id, topic_type, topic_name, answera, answerb, answerc, answerd, 
+    trueanswer, topic_difficulty, emphasis_id, emphasis_name, topic_createdate, topic_url, 
+    keyword, topic_state, videoimg_url, topic_analysis
+  </sql>
+  
+  <select id="query" resultMap="BaseResultMap" parameterType="com.yuzo.page.QstnPage" >
+    select 
+    
+     topic_id, subject_id, topic_type, topic_name, answera, answerb, answerc, answerd, 
+    trueanswer, topic_difficulty, emphasis_id, emphasis_name, topic_createdate, topic_url, 
+    keyword, topic_state, videoimg_url, topic_analysis
+    
+    from topic t
+	<where>
+		and topic_state = 0  
+		
+		<if test="topicId != null  and topicId != '' ">
+			and topic_id = #{topicId}
+		</if>
+		<if test="subjectId != null  and subjectId != '' ">
+			and subject_id = #{subjectId}
+		</if>
+		<if test="topicType != null  and topicType != '' ">
+			and topic_type = #{topicType}
+		</if>
+		<if test="subjRoot != null  and subjRoot != '' ">
+			and subject_id in ( 
+			    select subj.subject_id
+  				from subject  subj 
+  				where 	subj.subject_pid =  #{subjRoot}
+  			)
+		</if>
+	
+	</where>
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from topic
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from topic
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yuzo.entity.Topic" >
+    insert into topic (topic_id, subject_id, topic_type, 
+      topic_name, answera, answerb, 
+      answerc, answerd, trueanswer, 
+      topic_difficulty, emphasis_id, emphasis_name, 
+      topic_createdate, topic_url, keyword, 
+      topic_state, videoimg_url, topic_analysis
+      )
+    values (#{topicId,jdbcType=INTEGER}, #{subjectId,jdbcType=INTEGER}, #{topicType,jdbcType=INTEGER}, 
+      #{topicName,jdbcType=VARCHAR}, #{answera,jdbcType=VARCHAR}, #{answerb,jdbcType=VARCHAR}, 
+      #{answerc,jdbcType=VARCHAR}, #{answerd,jdbcType=VARCHAR}, #{trueanswer,jdbcType=VARCHAR}, 
+      #{topicDifficulty,jdbcType=TINYINT}, #{emphasisId,jdbcType=INTEGER}, #{emphasisName,jdbcType=VARCHAR}, 
+      #{topicCreatedate,jdbcType=TIMESTAMP}, #{topicUrl,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, 
+      #{topicState,jdbcType=INTEGER}, #{videoimgUrl,jdbcType=VARCHAR}, #{topicAnalysis,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yuzo.entity.Topic" >
+    insert into topic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topicId != null" >
+        topic_id,
+      </if>
+      <if test="subjectId != null" >
+        subject_id,
+      </if>
+      <if test="topicType != null" >
+        topic_type,
+      </if>
+      <if test="topicName != null" >
+        topic_name,
+      </if>
+      <if test="answera != null" >
+        answera,
+      </if>
+      <if test="answerb != null" >
+        answerb,
+      </if>
+      <if test="answerc != null" >
+        answerc,
+      </if>
+      <if test="answerd != null" >
+        answerd,
+      </if>
+      <if test="trueanswer != null" >
+        trueanswer,
+      </if>
+      <if test="topicDifficulty != null" >
+        topic_difficulty,
+      </if>
+      <if test="emphasisId != null" >
+        emphasis_id,
+      </if>
+      <if test="emphasisName != null" >
+        emphasis_name,
+      </if>
+      <if test="topicCreatedate != null" >
+        topic_createdate,
+      </if>
+      <if test="topicUrl != null" >
+        topic_url,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="topicState != null" >
+        topic_state,
+      </if>
+      <if test="videoimgUrl != null" >
+        videoimg_url,
+      </if>
+      <if test="topicAnalysis != null" >
+        topic_analysis,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topicId != null" >
+        #{topicId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null" >
+        #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="topicType != null" >
+        #{topicType,jdbcType=INTEGER},
+      </if>
+      <if test="topicName != null" >
+        #{topicName,jdbcType=VARCHAR},
+      </if>
+      <if test="answera != null" >
+        #{answera,jdbcType=VARCHAR},
+      </if>
+      <if test="answerb != null" >
+        #{answerb,jdbcType=VARCHAR},
+      </if>
+      <if test="answerc != null" >
+        #{answerc,jdbcType=VARCHAR},
+      </if>
+      <if test="answerd != null" >
+        #{answerd,jdbcType=VARCHAR},
+      </if>
+      <if test="trueanswer != null" >
+        #{trueanswer,jdbcType=VARCHAR},
+      </if>
+      <if test="topicDifficulty != null" >
+        #{topicDifficulty,jdbcType=TINYINT},
+      </if>
+      <if test="emphasisId != null" >
+        #{emphasisId,jdbcType=INTEGER},
+      </if>
+      <if test="emphasisName != null" >
+        #{emphasisName,jdbcType=VARCHAR},
+      </if>
+      <if test="topicCreatedate != null" >
+        #{topicCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicUrl != null" >
+        #{topicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="topicState != null" >
+        #{topicState,jdbcType=INTEGER},
+      </if>
+      <if test="videoimgUrl != null" >
+        #{videoimgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="topicAnalysis != null" >
+        #{topicAnalysis,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yuzo.entity.Topic" >
+    update topic
+    <set >
+      <if test="subjectId != null" >
+        subject_id = #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="topicType != null" >
+        topic_type = #{topicType,jdbcType=INTEGER},
+      </if>
+      <if test="topicName != null" >
+        topic_name = #{topicName,jdbcType=VARCHAR},
+      </if>
+      <if test="answera != null" >
+        answera = #{answera,jdbcType=VARCHAR},
+      </if>
+      <if test="answerb != null" >
+        answerb = #{answerb,jdbcType=VARCHAR},
+      </if>
+      <if test="answerc != null" >
+        answerc = #{answerc,jdbcType=VARCHAR},
+      </if>
+      <if test="answerd != null" >
+        answerd = #{answerd,jdbcType=VARCHAR},
+      </if>
+      <if test="trueanswer != null" >
+        trueanswer = #{trueanswer,jdbcType=VARCHAR},
+      </if>
+      <if test="topicDifficulty != null" >
+        topic_difficulty = #{topicDifficulty,jdbcType=TINYINT},
+      </if>
+      <if test="emphasisId != null" >
+        emphasis_id = #{emphasisId,jdbcType=INTEGER},
+      </if>
+      <if test="emphasisName != null" >
+        emphasis_name = #{emphasisName,jdbcType=VARCHAR},
+      </if>
+      <if test="topicCreatedate != null" >
+        topic_createdate = #{topicCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicUrl != null" >
+        topic_url = #{topicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="topicState != null" >
+        topic_state = #{topicState,jdbcType=INTEGER},
+      </if>
+      <if test="videoimgUrl != null" >
+        videoimg_url = #{videoimgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="topicAnalysis != null" >
+        topic_analysis = #{topicAnalysis,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yuzo.entity.Topic" >
+    update topic
+    set subject_id = #{subjectId,jdbcType=INTEGER},
+      topic_type = #{topicType,jdbcType=INTEGER},
+      topic_name = #{topicName,jdbcType=VARCHAR},
+      answera = #{answera,jdbcType=VARCHAR},
+      answerb = #{answerb,jdbcType=VARCHAR},
+      answerc = #{answerc,jdbcType=VARCHAR},
+      answerd = #{answerd,jdbcType=VARCHAR},
+      trueanswer = #{trueanswer,jdbcType=VARCHAR},
+      topic_difficulty = #{topicDifficulty,jdbcType=TINYINT},
+      emphasis_id = #{emphasisId,jdbcType=INTEGER},
+      emphasis_name = #{emphasisName,jdbcType=VARCHAR},
+      topic_createdate = #{topicCreatedate,jdbcType=TIMESTAMP},
+      topic_url = #{topicUrl,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      topic_state = #{topicState,jdbcType=INTEGER},
+      videoimg_url = #{videoimgUrl,jdbcType=VARCHAR},
+      topic_analysis = #{topicAnalysis,jdbcType=VARCHAR}
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+</mapper>

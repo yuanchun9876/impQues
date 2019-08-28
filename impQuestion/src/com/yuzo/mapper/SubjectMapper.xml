@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuzo.mapper.SubjectMapper" >
+  <resultMap id="BaseResultMap" type="com.yuzo.entity.Subject" >
+    <id column="subject_id" property="subjectId" jdbcType="INTEGER" />
+    <result column="subject_name" property="subjectName" jdbcType="VARCHAR" />
+    <result column="subject_pid" property="subjectPid" jdbcType="INTEGER" />
+    <result column="subject_info" property="subjectInfo" jdbcType="VARCHAR" />
+    <result column="subject_createdate" property="subjectCreatedate" jdbcType="TIMESTAMP" />
+    <result column="subject_sequ" property="subjectSequ" jdbcType="INTEGER" />
+    <result column="jsfxid" property="jsfxid" jdbcType="VARCHAR" />
+    <result column="fxmc" property="fxmc" jdbcType="VARCHAR" />
+    <result column="subject_pid_name" property="subjectPidName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    subject_id, subject_name, subject_pid, subject_info, subject_createdate, subject_sequ, 
+    jsfxid
+  </sql>
+  
+  <select id="queryRoot" resultMap="BaseResultMap"  >
+    select 
+    subj.subject_id, subj.subject_name, subj.subject_pid, subj.subject_info, subj.subject_createdate, subj.subject_sequ, subj.jsfxid
+    from subject  subj 
+    where 	subj.subject_pid is null	
+    			     
+  </select>
+  
+  <select id="queryByPid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    subj.subject_id, subj.subject_name, subj.subject_pid, subj.subject_info, subj.subject_createdate, subj.subject_sequ, subj.jsfxid
+    from subject  subj 
+    where 	subj.subject_pid = #{value}    			     
+  </select>
+  
+  <select id="queryByJsfx" resultMap="BaseResultMap"  >
+    select 
+    subj.subject_id, subj.subject_name, subj.subject_pid, subj.subject_info, subj.subject_createdate, subj.subject_sequ, subj.jsfxid
+    from subject  subj 
+    where 	subj.jsfxid = #{value}  	and  subj.subject_pid is null			     
+  </select>
+  
+  <select id="query" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    subj.subject_id, subj.subject_name, subj.subject_pid, subj.subject_info, subj.subject_createdate, subj.subject_sequ, subj.jsfxid
+    ,s2.subject_name subject_pid_name 
+    ,j.fxmc
+   
+    from subject  subj 
+    			left join subject s2  on subj.subject_pid = s2.subject_id
+    			left join jsfx j  on subj.jsfxid = j.jsfxid
+     
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from subject
+    where subject_id = #{subjectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from subject
+    where subject_id = #{subjectId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yuzo.entity.Subject" >
+    insert into subject (subject_id, subject_name, subject_pid, 
+      subject_info, subject_createdate, subject_sequ, 
+      jsfxid)
+    values (#{subjectId,jdbcType=INTEGER}, #{subjectName,jdbcType=VARCHAR}, #{subjectPid,jdbcType=INTEGER}, 
+      #{subjectInfo,jdbcType=VARCHAR}, #{subjectCreatedate,jdbcType=TIMESTAMP}, #{subjectSequ,jdbcType=INTEGER}, 
+      #{jsfxid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yuzo.entity.Subject" >
+    insert into subject
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subjectId != null" >
+        subject_id,
+      </if>
+      <if test="subjectName != null" >
+        subject_name,
+      </if>
+      <if test="subjectPid != null" >
+        subject_pid,
+      </if>
+      <if test="subjectInfo != null" >
+        subject_info,
+      </if>
+      <if test="subjectCreatedate != null" >
+        subject_createdate,
+      </if>
+      <if test="subjectSequ != null" >
+        subject_sequ,
+      </if>
+      <if test="jsfxid != null" >
+        jsfxid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subjectId != null" >
+        #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectName != null" >
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectPid != null" >
+        #{subjectPid,jdbcType=INTEGER},
+      </if>
+      <if test="subjectInfo != null" >
+        #{subjectInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCreatedate != null" >
+        #{subjectCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subjectSequ != null" >
+        #{subjectSequ,jdbcType=INTEGER},
+      </if>
+      <if test="jsfxid != null" >
+        #{jsfxid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yuzo.entity.Subject" >
+    update subject
+    <set >
+      <if test="subjectName != null" >
+        subject_name = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectPid != null" >
+        subject_pid = #{subjectPid,jdbcType=INTEGER},
+      </if>
+      <if test="subjectInfo != null" >
+        subject_info = #{subjectInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCreatedate != null" >
+        subject_createdate = #{subjectCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subjectSequ != null" >
+        subject_sequ = #{subjectSequ,jdbcType=INTEGER},
+      </if>
+      <if test="jsfxid != null" >
+        jsfxid = #{jsfxid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where subject_id = #{subjectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yuzo.entity.Subject" >
+    update subject
+    set subject_name = #{subjectName,jdbcType=VARCHAR},
+      subject_pid = #{subjectPid,jdbcType=INTEGER},
+      subject_info = #{subjectInfo,jdbcType=VARCHAR},
+      subject_createdate = #{subjectCreatedate,jdbcType=TIMESTAMP},
+      subject_sequ = #{subjectSequ,jdbcType=INTEGER},
+      jsfxid = #{jsfxid,jdbcType=VARCHAR}
+    where subject_id = #{subjectId,jdbcType=INTEGER}
+  </update>
+</mapper>
