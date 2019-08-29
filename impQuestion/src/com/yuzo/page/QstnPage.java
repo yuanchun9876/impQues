@@ -8,7 +8,7 @@ public class QstnPage {
 	private String jsfxid;
 	private String subjRoot;
 	
-	private String topicType;
+	private String topicType = "1";
 	
 	private Integer topicState = 0;
 	

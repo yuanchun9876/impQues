@@ -123,14 +123,6 @@
 									<!-- /.box-header -->
 									<!-- form start -->
 									<div class="box-body">
-									
-										<div class="form-group">
-											<label for="name" class="col-sm-2 control-label">试题</label>
-											<div class="col-sm-10">
-											   <textarea id="editor" type="text/plain"   hidden="true"   name="topicName"   required="required"  autofocus>${t.topicName }</textarea>
-											</div>
-										</div>
-										
 										<div class="form-group">
 											<label for="name" class="col-sm-2 control-label">导入类型</label>
 											<div class="col-sm-10">
@@ -138,6 +130,14 @@
 											</div>
 										
 										</div>
+										<div class="form-group">
+											<label for="name" class="col-sm-2 control-label">试题</label>
+											<div class="col-sm-10">
+											   <textarea id="editor" type="text/plain"   hidden="true"   name="topicName"   required="required"  autofocus>${t.topicName }</textarea>
+											</div>
+										</div>
+										
+									
 										<input type="hidden" class="form-control" name="topicId" value="${t.topicId }"  placeholder="" required="required">
 										<div class="form-group">
 											<label for="name" class="col-sm-2 control-label">类型</label>
