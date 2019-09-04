@@ -115,8 +115,9 @@
 								<!-- general form elements -->
 								<div class="box box-primary">
 									<div class="box-header with-border">
-										<h3 class="box-title">基本信息</h3>
+										<h3 class="box-title"><input  type="button" value="消除" onclick="delPage('${t.topicId}')" ></h3>
 										<div class="box-search">
+										
 											<button type="submit" class="btn btn-info pull-right">提交</button>
 										</div>
 									</div>
@@ -232,7 +233,12 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/static/simditor/scripts/simditor.js"></script>
 
 	<script type="text/javascript">
+	function delPage(id){
+		if(confirm("你确定要消除吗?")){
+			location.href="<%=request.getContextPath()%>/qstn/delPage.action?id=" + id;
+		}
 		
+	}	
 		
 	$(function(){
         Simditor.locale = 'zh-CN';//设置中文

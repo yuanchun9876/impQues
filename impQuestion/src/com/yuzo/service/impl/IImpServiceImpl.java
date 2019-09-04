@@ -46,6 +46,8 @@ public class IImpServiceImpl implements IImpService {
 	
 	@Override
 	public int impSave(Topic t) {
+		
+		System.out.println("length:" + t.getTopicName().length());
 
 		SqlSession session = sqlSessionFactory.openSession();
 		

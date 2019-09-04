@@ -180,6 +180,7 @@
 								<tr>
 									<th>序号</th>
 									<th>修改</th>
+									<th>消除</th>
 									<th>导入</th>
 									<th>topicId</th>									
 									<th>subjectId</th>
@@ -193,6 +194,9 @@
 										<td>${i.count }</td>
 										<td>
 											<input  type="button" value="修改" onclick="editPage('${t.topicId}')" >
+										</td>
+										<td>
+											<input  type="button" value="消除" onclick="delPage('${t.topicId}')" >
 										</td>
 										<td>
 											<input  type="button" value="导入" onclick="impPage('${t.topicId}')" >
@@ -238,6 +242,9 @@
 		location.href="<%=request.getContextPath()%>/qstn/impPage.action?id=" + id;
 	}
 	
+	function delPage(id){
+		location.href="<%=request.getContextPath()%>/qstn/delPage.action?id=" + id;
+	}
 	
 	
 	function selectSubj(jsfxId){

@@ -23,4 +23,6 @@ public interface IQstnService {
 
 	int impSave(Topic t);
 
+	int delPage(Integer id);
+
 }

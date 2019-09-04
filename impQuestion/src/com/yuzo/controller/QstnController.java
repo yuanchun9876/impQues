@@ -60,6 +60,15 @@ public class QstnController {
 		
 		return "qstn/edit_qstn";
 	}
+	
+	@RequestMapping("/delPage")
+	public String delPage(Integer id, Model model) {
+		System.out.println(id);
+		service.delPage(id);
+		
+		return "redirect:query.action";
+	}
+	
 	@RequestMapping("/impPage")
 	public String impPage(Integer id, Model model) {
 		

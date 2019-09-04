@@ -102,6 +102,20 @@ public class QstnServiceImpl implements IQstnService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int delPage(Integer id) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		mapper = session.getMapper(TopicMapper.class);
+		Topic t = new Topic();
+		t.setTopicId(id);
+		t.setTopicState(3);
+		int count = mapper.updateByPrimaryKeySelective(t);
+		session.commit();
+		session.close();
+		return count;
+	}
 	
 
 }
