@@ -184,9 +184,9 @@
 		            	</a>
 		            </li>
 		             <li >
-		            	<a href="<%=request.getContextPath() %>/warehouse.do?method=query"  target="ifr_content"  >
+		            	<a href="<%=request.getContextPath() %>/jsp/qstn/package_imp.jsp"  target="ifr_content"  >
 		            		<i class="glyphicon glyphicon-record"></i>
-		            		<span >仓库列表</span>
+		            		<span >批量导入</span>
 		            	</a>
 		            </li>
 		              <li >

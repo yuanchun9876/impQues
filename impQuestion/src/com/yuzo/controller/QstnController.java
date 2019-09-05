@@ -87,6 +87,28 @@ public class QstnController {
 		return "qstn/imp_qstn";
 	}
 	
+	@RequestMapping("/packImp")
+	public String packImp(Integer outId, String inId, Model model) {
+		
+		List<Topic> list = service.packImp(outId, inId);
+		
+		for (Topic t : list) {
+			t.setSctnId(inId);
+			
+			System.out.println("µ¼Èë:"+t);
+			int count = impService.impSave(t);
+			System.out.println("count:" + count);
+			
+			if(count>0) {
+				t.setTopicState(1);
+				int editcount = service.edit(t);
+				System.out.println("editcount:" + editcount);
+			}
+		}
+		
+		return "redirect:query.action";
+	}
+	
 	@RequestMapping("/editSave")
 	public String editSave(Topic t, Model model) {
 		

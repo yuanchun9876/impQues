@@ -25,4 +25,6 @@ public interface IQstnService {
 
 	int delPage(Integer id);
 
+	List<Topic> packImp(Integer outId, String inId);
+
 }

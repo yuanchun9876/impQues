@@ -97,6 +97,24 @@ public class IImpServiceImpl implements IImpService {
 		session.close();		
 		return count;
 	}
+
+
+	public void packImp(Integer outId, String inId) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		mapper = session.getMapper(TopicMapper.class);
+		
+		List<Topic> list = mapper.queryBySubj(outId);
+		System.out.println(list);
+		
+		for (Topic topic : list) {
+			
+		}
+		
+		
+		session.commit();
+		session.close();
+	}
 	
 
 }

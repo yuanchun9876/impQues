@@ -19,4 +19,6 @@ public interface TopicMapper {
     int updateByPrimaryKey(Topic record);
 
 	List<Topic> query(QstnPage page);
+
+	List<Topic> queryBySubj(Integer outId);
 }

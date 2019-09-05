@@ -116,6 +116,21 @@ public class QstnServiceImpl implements IQstnService {
 		session.close();
 		return count;
 	}
+
+	@Override
+	public List<Topic> packImp(Integer outId, String inId) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		mapper = session.getMapper(TopicMapper.class);
+		
+		List<Topic> list = mapper.queryBySubj(outId);
+		System.out.println(list);
+		
+		
+		session.commit();
+		session.close();
+		return list;
+	}
 	
 
 }
